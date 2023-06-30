@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jenchoi.tk/bossplayer-ctf-walkthrough/</loc>
+    
+    <lastmod>2023-06-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jenchoi.tk/hexo-tutorial/</loc>
     
     <lastmod>2023-06-30</lastmod>
@@ -30,15 +39,6 @@
   
   <url>
     <loc>https://jenchoi.tk/jangow-1.0.1-walkthrough/</loc>
-    
-    <lastmod>2023-06-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jenchoi.tk/bossplayer-ctf-walkthrough/</loc>
     
     <lastmod>2023-06-30</lastmod>
     
@@ -138,14 +138,21 @@
 
   
   <url>
-    <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8-%E9%9D%B6%E5%9C%BA/</loc>
+    <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8-%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2023-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8-%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/</loc>
+    <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2023-06-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8/%E9%9D%B6%E5%9C%BA/</loc>
     <lastmod>2023-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
