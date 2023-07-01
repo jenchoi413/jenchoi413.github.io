@@ -2,6 +2,60 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jenchoi.tk/chapter2-attack-priciples-and-methods/</loc>
+    
+    <lastmod>2023-07-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenchoi.tk/chapter1-information-security-overview/</loc>
+    
+    <lastmod>2023-07-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenchoi.tk/android-app-client-pentest-guide/</loc>
+    
+    <lastmod>2023-07-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenchoi.tk/information-security-engineer/</loc>
+    
+    <lastmod>2023-07-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenchoi.tk/burpsuite-captcha-killer-ddddocr/</loc>
+    
+    <lastmod>2023-07-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenchoi.tk/how-to-obtain-app-package-name/</loc>
+    
+    <lastmod>2023-07-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jenchoi.tk/install-drozer-on-windows/</loc>
     
     <lastmod>2023-06-30</lastmod>
@@ -21,15 +75,6 @@
   
   <url>
     <loc>https://jenchoi.tk/hexo-tutorial/</loc>
-    
-    <lastmod>2023-06-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jenchoi.tk/burpsuite-captcha-killer-ddddocr/</loc>
     
     <lastmod>2023-06-30</lastmod>
     
@@ -103,43 +148,50 @@
 
   <url>
     <loc>https://jenchoi.tk/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://jenchoi.tk/tags/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <loc>https://jenchoi.tk/tags/%E8%BD%AF%E8%80%83/</loc>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jenchoi.tk/tags/Hexo/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <lastmod>2023-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenchoi.tk/tags/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jenchoi.tk/tags/%E9%9D%B6%E5%9C%BA/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jenchoi.tk/tags/vulnhub%E7%B3%BB%E5%88%97/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jenchoi.tk/tags/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -147,36 +199,50 @@
 
   
   <url>
-    <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <loc>https://jenchoi.tk/categories/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jenchoi.tk/categories/Hexo/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <lastmod>2023-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2023-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenchoi.tk/categories/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/%E8%80%83%E8%AF%81/</loc>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8/%E9%9D%B6%E5%9C%BA/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jenchoi.tk/categories/%E5%AE%89%E5%85%A8/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2023-06-30</lastmod>
+    <lastmod>2023-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
