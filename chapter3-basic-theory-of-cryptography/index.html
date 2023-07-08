@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第3章：密码学基本理论 | jenchoi413的博客</title><meta name="keywords" content="软考"><meta name="author" content="jenchoi413"><meta name="copyright" content="jenchoi413"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="分值：4-6分 重点：密码学安全分析、密码体制、RSA、国产密码算法、Hash 函数&#x2F;算法、数字签名  密码学概述密码学是一门研究信息安全保护的科学，以实现信息的保密性、完整性、可用性及抗抵赖性。（CIA） 主要目的：保持明文的秘密以防止攻击者获知 密码学的组成  密码编码：研究信息的变换处理以实现信息的安全保护 密码分析：研究通过密文获取对应的明文信息  密码学发展  1949年，香">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第3章：密码学基本理论">
+<meta property="og:url" content="https://jenchoi.tk/chapter3-basic-theory-of-cryptography/index.html">
+<meta property="og:site_name" content="jenchoi413的博客">
+<meta property="og:description" content="分值：4-6分 重点：密码学安全分析、密码体制、RSA、国产密码算法、Hash 函数&#x2F;算法、数字签名  密码学概述密码学是一门研究信息安全保护的科学，以实现信息的保密性、完整性、可用性及抗抵赖性。（CIA） 主要目的：保持明文的秘密以防止攻击者获知 密码学的组成  密码编码：研究信息的变换处理以实现信息的安全保护 密码分析：研究通过密文获取对应的明文信息  密码学发展  1949年，香">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2023-07-08T14:34:47.000Z">
+<meta property="article:modified_time" content="2023-07-08T14:54:05.124Z">
+<meta property="article:author" content="jenchoi413">
+<meta property="article:tag" content="软考">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jenchoi.tk/chapter3-basic-theory-of-cryptography/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//s4.cnzz.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b720dcdb57e855ce5d2f82f91128d490";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" data-pjax="data-pjax" src="https://s4.cnzz.com/z_stat.php?id=G-RHZRPR9QK1&amp;web_id=G-RHZRPR9QK1"></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第3章：密码学基本理论',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-08 22:54:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/moments"><i class="fa-fw fas fa-comments"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">jenchoi413的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/moments"><i class="fa-fw fas fa-comments"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第3章：密码学基本理论</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-08T14:34:47.000Z" title="发表于 2023-07-08 22:34:47">2023-07-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-08T14:54:05.124Z" title="更新于 2023-07-08 22:54:05">2023-07-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第3章：密码学基本理论"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/chapter3-basic-theory-of-cryptography/#post-comment"><span class="waline-comment-count" data-path="/chapter3-basic-theory-of-cryptography/"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ul>
+<li>分值：4-6分</li>
+<li>重点：密码学安全分析、密码体制、RSA、国产密码算法、Hash 函数&#x2F;算法、数字签名</li>
+</ul>
+<h1 id="密码学概述"><a href="#密码学概述" class="headerlink" title="密码学概述"></a>密码学概述</h1><p>密码学是一门研究信息安全保护的科学，以实现信息的保密性、完整性、可用性及抗抵赖<br>性。（CIA）</p>
+<p>主要目的：保持明文的秘密以防止攻击者获知</p>
+<p>密码学的组成</p>
+<ul>
+<li>密码编码：研究信息的变换处理以实现信息的安全保护</li>
+<li>密码分析：研究通过密文获取对应的明文信息</li>
+</ul>
+<p>密码学发展</p>
+<ul>
+<li>1949年，香农发表了著名的论文《保密系统的通信理论》，提出 交替使用换位 和 置换以抵御统计分析，增加了混乱 (Confusion) 和扩散 (Diffusion) 的密码技术新方法。</li>
+<li>2005年4月1日起国家施行《中华人民共和国电子签名法》</li>
+<li>2006年我国政府公布了自己的商用密码算法，成为我国密码发展史上的一件大事</li>
+<li>2019年《中华人民共和国密码法》草案发布，<strong>2020年1月1日</strong>正式实行</li>
+</ul>
+<h1 id="⭐密码安全分析"><a href="#⭐密码安全分析" class="headerlink" title="⭐密码安全分析"></a>⭐密码安全分析</h1><p>(1) 唯密文攻击 (ciphertext-only attack) 。密码分析者只拥有一个或多个用同一个密钥加密的密文，没有其他可利用的信息。<br>(2) 已知明文攻击 (known-plaintext attack) 。密码分析者仅知道当前密钥下的一些明文及所对应的密文。<br>(3) 选择明文攻击 (chosen-plaintext attack) 。密码分析者能够得到当前密钥下自己选定的明文所对应的密文。<br>(4) 密文验证攻击 (ciphertext verification attack) 。密码分析者对于任何选定的密文，能够得到该密文“是否合法”的判断。<br>(5) 选择密文攻击 (chosen-ciphertext attack) 。除了挑战密文外，密码分析者能够得到任何选定的密文所对应的明文。</p>
+<h1 id="⭐密码体制"><a href="#⭐密码体制" class="headerlink" title="⭐密码体制"></a>⭐密码体制</h1><p>根据密钥的特点，密码体制分为<strong>私钥</strong>和<strong>公钥</strong>密码体制两种，而介于私钥和公钥之间的密码体制称为<strong>混合密码体制</strong>。</p>
+<p>1、私钥密码体制<br>    又称<strong>对称密码体制</strong>，指广泛应用的普通密码体制，该体制的特点是加密和解密使用相同的密钥<br>    假设网络中有n个使用者，使用者之间共个密钥，则共有 (n-1) &#x2F;2 个密钥<br>2、公钥密码体制<br>    <strong>非对称密码体制</strong>，加密密钥可公开<br>3、混合密码体制<br>    混合密码体制利用公钥密码体制分配私钥密码体制的密钥，消息的收发双方共用这个密钥，然后按照私钥密码体制的方式，进行加密和解密运算。<br>    1. 消息发送者 Alice 用对称密钥把需要发送的消息加密<br>    2. Alice用Bob的公开密钥将对称密钥加密，形成数字信封。然后， 起把加密消息和数字信封传送给 Bob 。<br>    3. Bob 收到 Alice 的加密消息和数字信封后，用自己的私钥将数字信封解密，获取 Alice密消息时的对称密钥。<br>    4. Bob 使用 Alice 加密的对称密钥把收到的加密消息解开。</p>
+<h1 id="常见加密算法"><a href="#常见加密算法" class="headerlink" title="常见加密算法"></a>常见加密算法</h1><h2 id="DES"><a href="#DES" class="headerlink" title="DES"></a>DES</h2><p>Data Encryption Standard 数据加密标准</p>
+<ul>
+<li>分组加密算法</li>
+<li>支持 64 bit的明文块加密，其密钥长度为 56 bit</li>
+<li>DES 是世界上应用最广泛的密码算法</li>
+</ul>
+<p>TDEA（Triple DataEncryption Algorithm）：三重DES</p>
+<ul>
+<li>工作机制：使用 DES 对明文进行“加密一解密一加密”操作，即对 DES 加密后的密文进行解密再加密，而解密则相反。<br>![](&#x2F;img&#x2F;Pasted image 20230708145812.png)</li>
+</ul>
+<h2 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h2><p>IDEA (International Data Encryption Agorithm)：国际数据加密算法的简记</p>
+<ul>
+<li>分组加密处理算法</li>
+<li>其明文和密文分组都是 64 比特，密钥长度为 128 比特</li>
+<li>同一算法既可用于加密又可用于解密</li>
+<li>设计思想：混合使用来自不同代数群中的运算</li>
+</ul>
+<h2 id="AES"><a href="#AES" class="headerlink" title="AES"></a>AES</h2><ul>
+<li>非保密的、公开的、全球免费使用的</li>
+<li>分组密码算法</li>
+<li>用于保护下一世纪政府的敏感信息。</li>
+</ul>
+<p>NIST 规定候选算法必须满足下面的要求:</p>
+<ul>
+<li>密码必须是没有密级的，绝不能像商业秘密那样来保护它</li>
+<li>算法的全部描述必须公开披露</li>
+<li>密码必须可以在世界范围内免费使用</li>
+<li>密码系统支持至少 128 比特长的分组</li>
+<li>密码支持的密钥长度至少为 128、192 和 256 比特<br>参与 AES 的候选算法中，Rijndael 提供了安全性、软件和硬件性能、低内存需求以及灵活性的最好的组合，因此 NIST 确定选择 Rijndael 作为 AES。</li>
+</ul>
+<h2 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h2><ul>
+<li>非对称算法</li>
+<li>由 Ronald Rivest、Adi Shamir、Leonard Adleman 三人共同在 1977年公开发表</li>
+<li>在 RSA 加密算法中，公钥和私钥都可以用于加密消息，用于加密消息的密钥与用于解密消息的密钥相反</li>
+<li>RSA 算法提供了一种保护网络通信和数据存储的机密性、完整性、真实性和不可否认性的方法</li>
+<li>目前，SSH、OpenPGP、SMME 和 SSL&#x2F;TLS 都依赖于 RSA 进行加密和<strong>数字签名</strong>功能</li>
+<li>RSA 算法在浏览器中使用，能够在不可信任的互联网中建立安全连接。RSA 签名验证是网络连接系统中最常见的执行操作之一。</li>
+</ul>
+<p>RSA 算法基于大整数因子分解的困难性，该算法的步骤如下：<br>第一步，生成两个大素数 p 和 q<br>第二步，计算这两个素数的乘积 m &#x3D;pq<br>    第三步，计算小于 n 并且与 n 互素的整数的个数，即欧拉函数φ(n)&#x3D;(p -1)(q -1)<br>第四步，选取一个随机数 e,且满足1&lt; e &lt; φ(n)，并且 e 和 φ(n) 互素，即 gcd(e,φ(n))&#x3D;1<br>第五步，计算<br>$$<br>e^{-1} mod\varphi (n)<br>$$</p>
+<p>第六步，保密 d、p和q，而公开 n 和 e，即d作为私钥，而 n 和 e 作为公钥。</p>
+<p>RSA 安全性保证要做到选取的素数p 和 g 足够大，使得给定了它们的乘积 n 后，在事先不知道p 或 g 的情况下分解  是计算上不可行的。<br>因此，破译 RSA 密码体制基本上等价于分解n<br>基于安全性考虑，要求n 长度至少应为 1024 比特，然而从长期的安全性来看，n 的长度至少应为 2048 比特，或者是 616 位的十进制数。</p>
+<h2 id="国产密码算法"><a href="#国产密码算法" class="headerlink" title="国产密码算法"></a>国产密码算法</h2><p>目前，已经公布的国产密码算法主要有：</p>
+<ul>
+<li>SM1<ul>
+<li>分组密码算法，对称加密</li>
+<li>分组长度为 128 比特，密钥长度为 128 比特</li>
+</ul>
+</li>
+<li>SM2<ul>
+<li>基于椭圆曲线，应用于公钥密码系统</li>
+<li>对于一般椭圆曲线的离散对数问题，目前只存在指数级计算复杂度的求解方法。与大数分解问题及有限域上离散对数问题相比，椭圆曲线离散对数问题的求解难度要大得多。因此，在相同安全程度的要求下，椭圆曲线密码较其他公钥密码所需的密钥规模要小得多</li>
+<li>SM2 算法可以用于数字签名、密钥交换、公钥加密</li>
+</ul>
+</li>
+<li>SM3<ul>
+<li>杂凑算法</li>
+<li>对长度为l (l &lt; 2^64) 比特的消息 m ，经过填充、选代压缩，生成杂凑值，杂凑值输出长度为 256 比特</li>
+</ul>
+</li>
+<li>SM4<ul>
+<li>分组算法</li>
+<li>分组长度为 128 比特，密钥长度为 128 比特</li>
+<li>加密算法与密钥扩展算法都采用 32 轮非线性选代结构。数据解密和数据加密的算法结构相同，只是轮密钥的使用顺序相反，解密轮密钥是加密轮密钥的逆序。</li>
+</ul>
+</li>
+<li>SM9<ul>
+<li>标识密码算法</li>
+<li>在标识密码系统中，用户的私钥由密钥生成中心(KGC) 根据主密钥和用户标识计算得出，用户的公钥由用户标识唯一确定，因而用户不需要通过第三方保证其公钥的真实性。与基于证书的公钥密码系统相比较，标识密码系统中的密钥管理环节可以得到简化。</li>
+<li>SM9 可支持实现公钥加密、密钥交换、数字签名等安全功能</li>
+</ul>
+</li>
+</ul>
+<h1 id="Hash函数"><a href="#Hash函数" class="headerlink" title="Hash函数"></a>Hash函数</h1><ul>
+<li>杂凑函数简称 Hash 函数</li>
+<li>它能够将任意长度的信息转换成固定长度的哈希值(又称数字摘要或消息摘要)，并且任意不同消息或文件所生成的哈希值是不一样的。</li>
+</ul>
+<p>令h表示 Hash 函数，则h满足下列条件：<br>(1) h的输入可以是任意长度的消息或文件 M<br>(2) h 的输出的长度是固定的<br>(3) 给定h和M，计算 h(M) 是容易的<br>(4) 给定h的描述，找两个不同的消息 M1 和M2，使得 h(M1)&#x3D; h(M2)是计算上不可行的</p>
+<p>Hash 函数的安全性，是指在现有的计算资源下，找到一个碰撞是不可能的。<br>Hash 函数在网络安全应用中，不仅能用于保护消息或文件的完整性，而且也能用作密码信息的安全存储</p>
+<p>常见Hash算法</p>
+<ul>
+<li>MD5<ul>
+<li>以 512 位数据块为单位来处理输入，产生 128 位的消息摘要，即MD5 能产生 128 比特长度的哈希值</li>
+<li>MD5 使用广泛，常用在文件完整性检查</li>
+<li>MD5 的安全性已经不足</li>
+</ul>
+</li>
+<li>SHA<ul>
+<li>SHA-1 与 MD5 的设计原理类似，同样也以 512 位数据块为单位来处理输入，产生 160 位的哈希值，具有比 MD5 更强的安全性</li>
+<li>SHA 算法的安全性不断改进，已发布的版本有 SHA-2、SHA-3。SHA 算法产生的哈希值长度有 SHA-224、SHA-256、SHA-384、SHA-512 等</li>
+</ul>
+</li>
+<li>SM3<ul>
+<li>消息分组长度为512 比特，输出杂凑值长度为 256 比特<ul>
+<li>采用 Merkle-Damgard 结构</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h1><p>1、数字签名(Digital Signature) ：</p>
+<ul>
+<li>是指签名者使用私对待签名数据的杂凑值做密码运算得到的结果</li>
+<li>该结果只能用签名者的公钥进行验证，用于确认待签名数据的完整性、签名者身份的真实性和签名行为的抗抵赖性</li>
+</ul>
+<p>2、数字签名的目的<br>通过网络信息安全技术手段实现传统的纸面签字或者盖章的功能，以确认交易当事人的真实身份，保证交易的安全性、真实性和不可抵赖性。</p>
+<p>3、数字签名具有与手写签名一样的特点，是可信的、不可伪造的、不可重用的、不可抵赖的以及不可修改的。</p>
+<p>4、数字签名至少应满足以下三个条件<br>(1) 非否认。签名者事后不能否认自己的签名。<br>(2) 真实性。接收者能验证签名，而任何其他人都不能伪造签名。<br>(3) 可鉴别性。当双方关于签名的真伪发生争执时，第三方能解决双方之间发生的争执。</p>
+<p>5、一个数字签名方案一般由签名算法和验证算法组成。签名算法密钥是秘密的，只有签名的人掌握：而验证算法则是公开的，以便他人验证。</p>
+<p>6、典型的数字签名方案有 RSA 签名体制、Rabin签名体制、EIGamal签名体制和 DSS (Data Signature Standard) 标准</p>
+<p>7、签名与加密</p>
+<ul>
+<li>一般是签名者利用秘密密钥(私钥)对需签名的数据进行加密，验证方利用签名者的公开密钥(公钥)对签名数据做解密运算</li>
+<li>签名与加密的不同之处在于，加密的目的是保护信息不被非授权用户访问，而签名是使消息接收者确信信息的发送者是谁，信息是否被他人篡改。</li>
+</ul>
+<p>8、数字签名工作的基本流程<br>假设 Alice 需要签名发送一份电子合同文件给 Bob.<br>(1)Alice 的签名步骤如下:<br>第一步，Alice 使用 Hash 函数将电子合同文件生成一个消息摘要<br>第二步，Alice 使用自己的私钥，把消息摘要加密处理，形成一个数字签名<br>第三步，Alice 把电子合同文件和数字签名一同发送给 Bob<br>(2)Bob收到 Alice 发送的电子合同文件及数字签名后，为确信电子合同文件是 Alice 所认可的，验证步骤如下:<br>第一步，Bob 使用与 Alice 相同的 Hash 算法，计算所收到的电子合同文件的消息摘要<br>第二步，Bob 使用 Alice 的公钥解密来自 Alice 的加密消息摘要，恢复 Alice 原来的消息摘要<br>第三步，Bob 比较自己产生的消息摘要和恢复出来的消息摘要之间的异同。若两个消息摘要相同，则表明电子合同文件来自 Alice；如果两个消息摘要的比较结果不一致，则表明电子合同文件已被篡改。</p>
+<h1 id="密码管理"><a href="#密码管理" class="headerlink" title="密码管理"></a>密码管理</h1><p>密码系统的安全性依赖于密码管理</p>
+<p>密码管理 组成</p>
+<ul>
+<li>密钥管理：密钥管理主要围绕密钥的生命周期进行<ul>
+<li>密钥生成。密钥应由密码相关产品或工具按照一定标准产生，通常包括密码算法选择、密钥长度等。密钥生成时要同步记录密钥的关联信息，如拥有者、密钥使用起始时间、密钥使用终止时间等</li>
+<li>密钥存储。一般来说密钥不应以明文方式存储保管，应采取严格的安全防护措施，防止密钥被非授权的访问或篡改</li>
+<li>密钥分发。密钥分发工作是指通过安全通道，把密钥安全地传递给相关接收者，防止密钥遭受截取、篡改、假冒等攻击，保证密钥机密性、完整性以及分发者、接收者身份的真实性。目前，密钥分发的方式主要有人工、自动化和半自动化。其中，自动化主要通过密钥交换协议进行</li>
+<li>密钥使用。密钥使用要根据不同的用途而选择正确的使用方式。密钥使用和密码产品保持一致性，密码算法、密钥长度、密码产品都要符合相关管理政策，即安全合规。使用密钥前，要验证密钥的有效性，如公钥证书是否有效。密钥使用过程中要防止密钥的泄露和替换，按照密钥安全策略及时更换密钥。建立密钥应急响应处理机制，以应对突发事件，如密钥丢失事件、密钥泄密事件、密钥算法缺陷公布等。</li>
+<li>密钥更新。当密钥超过使用期限、密钥信息泄露、密码算法存在安全缺陷等情况发生时，相关密钥应根据相应的安全策略进行更新操作，以保障密码系统的有效性。</li>
+<li>密钥撤销。当密钥到期、密钥长度增强或密码安全应急事件出现的时候，则需要进行撤销密钥，更换密码系统参数。撤销后的密钥一般不重复使用，以免密码系统的安全性受到损害。</li>
+<li>密钥备份。密钥备份应按照密钥安全策略，采用安全可靠的密钥备份机制对密钥进行备份。备份的密钥与密钥存储要求一致，其安全措施要求保障备份的密钥的机密性、完整性、可用性</li>
+<li>密钥恢复。密钥恢复是在密钥丢失或损毁的情形下，通过密钥备份机制，能够恢复密码系统的正常运行。</li>
+<li>密钥销毁。根据密钥管理策略，可以对密钥进行销毁。一般来说销毁过程应不可逆无法从销毁结果中恢复原密钥。特殊的情况下，密钥管理支持用户密钥恢复和司法密钥恢复。</li>
+<li>密钥审计。密钥审计是对密钥生命周期的相关活动进行记录，以确保密钥安全合规违规情况可查可追溯。</li>
+</ul>
+</li>
+<li>密码管理政策<ul>
+<li>指国家对密码进行管理的有关法律政策文件、标准规范、安全质量测评等</li>
+<li>目前，国家已经颁布了《商用密码管理条例》、《中华人民共和国密码法》</li>
+<li>《中华人民共和国密码法》明确规定，密码分为<strong>核心密码、普通密码和商用密码</strong>，实行分类管理。核心密码、普通密码用于保护国家秘密信息，属于国家秘密，由密码管理部门依法实行严格统一管理。商用密码用于保护不属于国家秘密的信息，公民、法人和其他组织均可依法使用商用密码保护网络与信息安全。</li>
+<li>国家密码管理局发布了一系列密码行业标准，主要有《电子政务电子认证服务管理办法》《电子政务电子认证服务业务规则规范》《密码模块安全检测要求》《安全数据库产品密码检测准则》《安全隔离与信息交换产品密码检测指南》《安全操作系统产品密码检测准则》《防火墙产品密码检测准则》等。</li>
+</ul>
+</li>
+<li>密码测评<ul>
+<li>指对相关密码产品及系统进行安全性、合规性评估，以确保相关对象的密码安全有效，保障密码系统的安全运行。</li>
+<li>目前，国家设立了商用密码检测中心，其主要职责包括:商用密码产品密码检测、信息安全产品认证密码检测、含有密码技术的产品密码检测、信息安全等级保护商用密码测评、商用密码行政执法密码鉴定、国家电子认证根 CA 建设和运行维护、密码技术服务、商用密码检测标准规范制订等</li>
+</ul>
+</li>
+</ul>
+<h1 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h1><p>1、数字证书(Digital Certificate) 也称<strong>公证书</strong>，是由<strong>证书认证机构(CA) 签名</strong>的<strong>包含公开密钥拥有者信息、公开密钥、签发者信息、有效期以及扩展信息的一种数据结构</strong>。</p>
+<p>2、某国外机构颁发的数字证书样式<br>![](&#x2F;img&#x2F;Pasted image 20230708220431.png)</p>
+<p>3、数字证书基本信息域<br>![](&#x2F;img&#x2F;Pasted image 20230708220601.png)</p>
+<p>4、用户证书结构实例<br>![](&#x2F;img&#x2F;Pasted image 20230708220700-1688828008880-2.png)</p>
+<p>5、数字证书分类<br>a. 按类别</p>
+<ul>
+<li>个人证书</li>
+<li>机构证书</li>
+<li>设备证书<br>b. 按用途</li>
+<li>签名证书：用于证明签名公钥的数字证书</li>
+<li>加密证书：用于证明加密公钥的数字证书</li>
+</ul>
+<p>6、当前，为更好地管理数字证书，一般是基于 <strong>PKI技术</strong> 建立数字证书认证系统(简称为CA)。CA 提供数字证书的申请、审核、签发、查询、发布以及证书吊销等全生命周期的管理服务。</p>
+<h1 id="安全协议"><a href="#安全协议" class="headerlink" title="安全协议"></a>安全协议</h1><h2 id="Diffie-Hellman-密钥交换协议"><a href="#Diffie-Hellman-密钥交换协议" class="headerlink" title="Diffie-Hellman 密钥交换协议"></a>Diffie-Hellman 密钥交换协议</h2><p>Diffie-Hellman 密钥交换协议基于求解离散对数问题的困难性，即对于下述等式:<br>$$<br>c^d&#x3D;M mod P $$<br>$$<br>其中，d称为模P的以C为底数的M的对数，在已知 C和P的前提下，由d求M很容易，只相当于进行一次指数计算。而再由 M 反过来求 d，则需要指数级次计算。随着 P取得足够大，就能实现足够的安全强度。</p>
+<h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><p>1、SSH是 Secure Shell 的缩写，即“安全外壳”</p>
+<ul>
+<li>基于公钥的安全应用协议</li>
+<li>由 SSH传输层协议、SSH 用户认证协议和 SSH 连接协议三个子协议组成，各协议分工合作，实现加密、认证、完整性检查等多种安全服务。</li>
+<li>SSH研究开发的目的是以一种渐进的方式来增强网络安全，通过利用现代密码技术，增强网络中非安全的服务。</li>
+<li>目前，SSH 已有两个版本 SSH1 和 SSH2，其中 SSH1 因存在漏洞而被停用，现在用户使用的是 SSH2。</li>
+</ul>
+<p>2、SSH 传输层协议提供算法协商和密钥交换，并实现服务器的认证，最终形成一个加密的安全连接，该安全连接提供完整性、保密性和压缩选项服务。<br>SSH 用户认证协议则利用传输层的服务来建立连接，使用传统的口令认证、公钥认证、主机认证等多种机制认证用户。<br>SSH连接协议在前面两个协议的基础上，利用已建立的认证连接，并将其分解为多种不同的并发逻辑通道，支持注册会话隧道和 TCP 转发 (TCP-forwardig)，而且能为这些通道提供流控服务以及通道参数协商机制。</p>
+<p>3、SSH 的工作机制<br>(1) 客户获取服务器的证书<br>(2) SSH请求连接<br>(3) 初始化连接请求，发送服务器公钥<br>(4) 客户端验证服务器公钥<br>(5) 建立DH密钥<br>(6) 认证用户<br>(7) 使用SSH Tunnel</p>
+<p>4、用户认证服务器的公钥真实性 的方法<br>(1) 用户直接随身携带含有服务器公钥的拷贝，在进行密钥交换协议前，读入客户计算机<br>(2) 从公开信道下载服务器的公钥和它对应的指纹后，先通过电话验证服务器的公钥指纹的真实性，然后用 HASH 软件生成服务器的公钥新指纹，比较下载的指纹和新生成的指纹，若比较结果相同，则表明服务器的公钥是真实的，否则服务器的公钥是虚假的<br>(3) 通过 PKI 技术来验证服务器。</p>
+<p>5、在实际的应用中，SSH 在端口转发技术的基础上，能够支持远程登录(Telmet)、rsh、rlogin、文件传输 (scp) 等多种安全服务。</p>
+<p>6、Linux 系统一般提供 SSH 服务，SSH的服务进程端口通常为 22</p>
+<h1 id="密码学网络安全应用"><a href="#密码学网络安全应用" class="headerlink" title="密码学网络安全应用"></a>密码学网络安全应用</h1><p>1、密码技术常见应用场景类型</p>
+<ol>
+<li>网络用户安全<br> 采用密码技术保护网络用户的安全措施主要有:一是基于公钥密码学技术，把用户实体信息与密码数据绑定，形成数字证书，标识网络用户身份，并提供身份鉴别服务;二是使用加密技术，保护网络用户的个人敏感信息。</li>
+<li>物理和环境安全<br> 采用密码技术保护物理和环境的安全措施主要有:一是对物理区域访问者的身份进行鉴别，保证来访人员的身份真实性:二是保护电子门禁系统进出记录的存储完整性和机密性;三是保证视频监控音像记录的存储完整性和机密性。</li>
+<li>网络和通信安全<br> 采用密码技术保护网络和通信的安全措施主要有:一是对通信实体进行双向身份鉴别，保证通信实体身份的真实性;二是使用数字签名保证通信过程中数据的完整性;三是对通信过程中进出的敏感字段或通信报文进行加密;四是使用密码安全认证协议对网络设备进行接入认证，确保接入的设备身份的真实性。</li>
+<li>设备和计算安全<br> 采用密码技术保护设备和计算的安全措施主要有:一是使用密码安全认证协议对登录设备用户的身份进行鉴别;二是使用 Hash 函数及密码算法建立可信的计算环境;三是使用数字签名验证重要可执行程序来源的真实性，四是使用加密措施保护设备的重要信息资源，如口令文件:五是使用 SSH及 SSL 等密码技术，建立设备远程管理安全信息传输通道。</li>
+<li>应用和数据安全<br> 采用密码技术保护应用和数据的安全措施主要有。一是使用安全协议及数字证书对登录用户进行身份鉴别，保证应用系统用户身份的真实性，二是加密应用系统访问控制信息:三是应用 SSH 及 SSL 等密码技术，传输重要数据，保护重要数据的机密性和完整性:四是加密存储重要数据，防止敏感数据泄密: 五是使用 Hash 函数、数字签名等密码技术，保护应用系统的完整性，防止黑客攻击篡改。</li>
+<li>业务应用创新<br> 采用密码技术进行业务应用创新的措施主要有:一是利用数字证书和数字签名等密码技术，构建网络发票;二是使用 Hash 函数等密码技术，构建区块链:三是利用密码技术，建立电子证照。</li>
+</ol>
+<p>2、路由器安全应用参考</p>
+<ol>
+<li>路由器口令管理<br> 为了路由器口令的安全存储，路由器先用 MD5 对管理员口令信息进行 Hash 计算，然后再保存到路由器配置文件中。</li>
+<li>远程安全访问路由器<br> 远程访问路由器常用 Telmet，但 Tenet 容易泄露敏感的口令信息，因此，管理员为增强路由器的安全管理，使用 SSH 替换 Telmet。</li>
+<li>路由信息交换认证<br> 路由器之间需要进行路由信息的交换，以保证网络路由正常进行，因此需要路由器之间发送路由更新包。为了防止路由欺诈，路由器之间对路由更新包都进行完整性检查，以保证路由完整性。目前，路由器常用MD5-HMAC 来实现。如果路由信息在传输过程中被篡改了，接收路由器通过重新计算收到路由信息的 Hash 值，然后与发送路由器的路由信息的 Hash 值进行比较，如果两个 Hash 值不相同，则接收路由器拒绝路由更新包</li>
+</ol>
+<p>3、Web 网站安全应用参考<br>Web 网站是网络应用的重要组成部分，许多重要的网络应用业务如网络银行、新闻发布、电子商务等都基于 Web 服务开展，其安全性变得日益重要。Web 网站已成为黑客攻击的重点目标，其安全威胁主要有信息泄露、非授权访问、网站假冒、拒绝服务等。密码学在 Web 方面的安全应用有许多，包括 We 用户身份认证、Web 服务信息加密处理以及 Web 信息完整性检查等。目前，重要信息网站通过数字证书和 SSL 共同保护 Web 服务的安全。利用 SSL 和数字证书，可以防止浏览器和 Web 服务器间的通信信息泄密或被篡改和伪造。</p>
+<p>4、电子邮件安全应用参考<br>电子邮件是最常见的网络应用，但是普通的电子邮件是明文传递的，电子邮件的保密性难以得到保证，同时电子邮件的完整性也存在安全问题。针对电子邮件的安全问题,人们利用PGP(PretGood Privacy)来保护电子邮件的安全。PGP 是一种加密软件，目前最广泛地用于电子邮件安全。它能够防止非授权者阅读邮件，并能对用户的邮件加上数字签名，从而使收信人可以确信发信人的身份。PGP 应用了多种密码技术，其中密钥管理算法选用 RSA、数据加密算法IDEA、完整性检测和数字签名算法，采用了 MD5 和 RSA 以及随机数生成器，PGP 将这些密码技术有机集成在一起利用对称和非对称加密算法的各自优点，实现了一个比较完善的密码系统。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jenchoi.tk">jenchoi413</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jenchoi.tk/chapter3-basic-theory-of-cryptography/">https://jenchoi.tk/chapter3-basic-theory-of-cryptography/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jenchoi.tk" target="_blank">jenchoi413的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BD%AF%E8%80%83/">软考</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/catalogue-of-network-equipment-and-security-products/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2023《网络关键设备和网络安全专用产品目录》</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/information-security-engineer/" title="软考-信息安全工程师-备考笔记"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-01</div><div class="title">软考-信息安全工程师-备考笔记</div></div></a></div><div><a href="/chapter2-attack-priciples-and-methods/" title="第2章：网络攻击原理与常用方法"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-01</div><div class="title">第2章：网络攻击原理与常用方法</div></div></a></div><div><a href="/chapter1-information-security-overview/" title="第1章：网络信息安全概述"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-01</div><div class="title">第1章：网络信息安全概述</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E5%AD%A6%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">密码学概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%AD%90%E5%AF%86%E7%A0%81%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">⭐密码安全分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%AD%90%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">⭐密码体制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">常见加密算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DES"><span class="toc-number">4.1.</span> <span class="toc-text">DES</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDEA"><span class="toc-number">4.2.</span> <span class="toc-text">IDEA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AES"><span class="toc-number">4.3.</span> <span class="toc-text">AES</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RSA"><span class="toc-number">4.4.</span> <span class="toc-text">RSA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BD%E4%BA%A7%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95"><span class="toc-number">4.5.</span> <span class="toc-text">国产密码算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">Hash函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="toc-number">6.</span> <span class="toc-text">数字签名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86"><span class="toc-number">7.</span> <span class="toc-text">密码管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="toc-number">8.</span> <span class="toc-text">数字证书</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE"><span class="toc-number">9.</span> <span class="toc-text">安全协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Diffie-Hellman-%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E5%8D%8F%E8%AE%AE"><span class="toc-number">9.1.</span> <span class="toc-text">Diffie-Hellman 密钥交换协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSH"><span class="toc-number">9.2.</span> <span class="toc-text">SSH</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E5%AD%A6%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%BA%94%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">密码学网络安全应用</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By jenchoi413</div><div class="footer_custom_text">来自地狱-去往天堂-路过人间</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'comments.jenchoi.tk',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: true,
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,3 +1,4 @@
+https://jenchoi.tk/chapter3-basic-theory-of-cryptography/
 https://jenchoi.tk/moments/index.html
 https://jenchoi.tk/sqli-character-and-number-type-judgment/
 https://jenchoi.tk/internship-summary/
