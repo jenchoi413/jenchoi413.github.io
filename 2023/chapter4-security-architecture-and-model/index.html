@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第4章：网络安全体系与模型 | jenchoi413的博客</title><meta name="keywords" content="软考"><meta name="author" content="jenchoi413"><meta name="copyright" content="jenchoi413"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="网络安全体系1、是什么网络安全体系是网络安全保障系统的最高层概念抽象，是由各种网络安全单元按照一定的规则组成的，共同实现网络安全的目标。 2、组成部分网络安全体系包括法律法规政策文件、安全策略、组织管理、技术措施、标准规范、安全建设与运营、人员队伍、教育培训、产业生态安全投入等多种要素。 3、特征(1) 整体性。网络安全体系从全局、长远的角度实现安全保障，网络安全单元按照一定的规则，相互依赖、相互">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第4章：网络安全体系与模型">
+<meta property="og:url" content="https://jenchoi.top/2023/chapter4-security-architecture-and-model/index.html">
+<meta property="og:site_name" content="jenchoi413的博客">
+<meta property="og:description" content="网络安全体系1、是什么网络安全体系是网络安全保障系统的最高层概念抽象，是由各种网络安全单元按照一定的规则组成的，共同实现网络安全的目标。 2、组成部分网络安全体系包括法律法规政策文件、安全策略、组织管理、技术措施、标准规范、安全建设与运营、人员队伍、教育培训、产业生态安全投入等多种要素。 3、特征(1) 整体性。网络安全体系从全局、长远的角度实现安全保障，网络安全单元按照一定的规则，相互依赖、相互">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2023-07-09T07:44:34.000Z">
+<meta property="article:modified_time" content="2023-07-10T07:45:39.013Z">
+<meta property="article:author" content="jenchoi413">
+<meta property="article:tag" content="软考">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jenchoi.top/2023/chapter4-security-architecture-and-model/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//s4.cnzz.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b720dcdb57e855ce5d2f82f91128d490";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" data-pjax="data-pjax" src="https://s4.cnzz.com/z_stat.php?id=G-RHZRPR9QK1&amp;web_id=G-RHZRPR9QK1"></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第4章：网络安全体系与模型',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-10 15:45:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/moments"><i class="fa-fw fas fa-comments"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">jenchoi413的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/moments"><i class="fa-fw fas fa-comments"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第4章：网络安全体系与模型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-09T07:44:34.000Z" title="发表于 2023-07-09 15:44:34">2023-07-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-10T07:45:39.013Z" title="更新于 2023-07-10 15:45:39">2023-07-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第4章：网络安全体系与模型"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2023/chapter4-security-architecture-and-model/#post-comment"><span class="waline-comment-count" data-path="/2023/chapter4-security-architecture-and-model/"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="网络安全体系"><a href="#网络安全体系" class="headerlink" title="网络安全体系"></a>网络安全体系</h1><p>1、是什么<br>网络安全体系是网络安全保障系统的最高层概念抽象，是由各种网络安全单元按照一定的规则组成的，共同实现网络安全的目标。</p>
+<p>2、组成部分<br>网络安全体系包括法律法规政策文件、安全策略、组织管理、技术措施、标准规范、安全建设与运营、人员队伍、教育培训、产业生态安全投入等多种要素。</p>
+<p>3、特征<br>(1) 整体性。网络安全体系从全局、长远的角度实现安全保障，网络安全单元按照一定的规则，相互依赖、相互约束、相互作用而形成人机物一体化的网络安全保护方式。<br>(2) 协同性。网络安全体系依赖于多种安全机制，通过各种安全机制的相互协作，构建系统性的网络安全保护方案。<br>(3) 过程性。针对保护对象，网络安全体系提供一种过程式的网络安全保护机制，覆盖保护对象的全生命周期。<br>(4) 全面性。网络安全体系基于多个维度、多个层面对安全威胁进行管控，构建防护、检测、响应、恢复等网络安全功能。<br>(5) 适应性。网络安全体系具有动态演变机制，能够适应网络安全威胁的变化和需求。</p>
+<p>4、用途<br>(1) 有利于系统性化解网络安全风险，确保业务持续开展并将损失降到最低限度<br>(2) 有利于强化工作人员的网络安全意识，规范组织、个人的网络安全行为<br>(3) 有利于对组织的网络资产进行全面系统的保护，维持竞争优势<br>(4) 有利于组织的商业合作<br>(5) 有利于组织的网络安全管理体系认证，证明组织有能力保障重要信息，能提高组织的知名度与信任度</p>
+<h1 id="相关安全模型"><a href="#相关安全模型" class="headerlink" title="相关安全模型"></a>相关安全模型</h1><h2 id="BLP模型"><a href="#BLP模型" class="headerlink" title="BLP模型"></a>BLP模型</h2><p>1、用途<br>全称Bell-LaPadula 模型<br>该模型用于防止非授权信息的扩散，从而保证系统的安全。</p>
+<p>2、特性<br>(1) 简单安全特性。主体对客体进行读访问的必要条件是主体的安全级别不小于客体的安全级别，主体的范畴集合包含客体的全部范畴，即主体只能向下读，不能向上读。<br>(2) * 特性。一个主体对客体进行写访问的必要条件是客体的安全级支配主体的安全级,即客体的保密级别不小于主体的保密级别，客体的范畴集合包含主体的全部范畴，即主体只能向上写，不能向下写。</p>
+<p>3、策略规定<br>用户要合法读取某信息，当且仅当用户的安全级大于或等于该信息的安全级，并且用户的访问范畴包含该信息范畴时。<br>为了实现军事安全策略，计算机系统中的信息和用户都分配了一个访问类，它由两部分组成:<br>安全级：安全级别对应诸如公开、秘密、机密和绝密等名称（公开&lt;秘密&lt;机密&lt;绝密）<br>范畴集：指安全级的有效领域或信息所归属的领域，如人事处、财务处等。两个范畴集之间的关系是包含、被包含或无关。在一个访问类中，仅有单一的安全级，而范畴可以包含多个。</p>
+<h2 id="BiBa模型"><a href="#BiBa模型" class="headerlink" title="BiBa模型"></a>BiBa模型</h2><p>主要用于防止非授权修改系统信息，以保护系统的信息完整性。该模型同 BLP模型类似，采用主体、客体、完整性级别描述安全策略要求。</p>
+<p>1、安全特性<br>(1) 简单安全特性。主体对客体进行修改访问的必要条件是主体的完整性级别不小于客体的完整性级别，主体的范畴集合包含客体的全部范畴，即主体不能向下读<br>(2) * 特性。主体的完整性级别小于客体的完整性级别，不能修改客体，即主体不能向上写，如图 4-3 所示。<br>(3) 调用特性。主体的完整性级别小于另一个主体的完整性级别，不能调用另一个主体</p>
+<h2 id="信息流模型"><a href="#信息流模型" class="headerlink" title="信息流模型"></a>信息流模型</h2><p>信息流模型是访问控制模型的一种变形，简称 FM</p>
+<p>该模型不检查主体对客体的存取，而是根据两个客体的安全属性来控制从一个客体到另一个客体的信息传输。<br>一般情况下，信息流模型可表示为FM&#x3D;(N, P, SC, ×, →)</p>
+<ul>
+<li>N 表示客体集</li>
+<li>P 表示进程集</li>
+<li>SC 表示安全类型集</li>
+<li>×表示支持结合、交换的二进制运算符</li>
+<li>→表示流关系<br>一个安全的 FM 当且仅当执行系列操作后不会导致流与流关系 → 产生冲突</li>
+</ul>
+<p>信息流模型可以用于分析系统的隐蔽通道，防止敏感信息通过隐蔽通道泄露。隐蔽通道通常表现为低安全等级主体对于高安全等级主体所产生信息的间接读取，通过信息流分析以发现隐蔽通道，阻止信息泄露途径。</p>
+<h2 id="信息保障模型"><a href="#信息保障模型" class="headerlink" title="信息保障模型"></a>信息保障模型</h2><p>1、PDRR 模型</p>
+<ul>
+<li>保护(Protection) 的内容主要有加密机制、数据签名机制、访问控制机制、认证机制、信息隐藏、防火墙技术等。</li>
+<li>检测 (Detection) 的内容主要有入侵检测、系统脆弱性检测、数据完整性检测、攻击性检测等。</li>
+<li>恢复 (Recovery) 的内容主要有数据备份、数据修复、系统恢复等。</li>
+<li>响应 (Response) 的内容主要有应急策略、应急机制、应急手段、入侵过程分析及安全状态评估等<br>PDRR 改进了传统的只有保护的单一安全防御思想，强调信息安全保障的四个重要环节。</li>
+</ul>
+<p>2、P2DR 模型</p>
+<ul>
+<li>策略 (Policy) </li>
+<li>防护 (Protection) </li>
+<li>检测 (Detection) </li>
+<li>响应(Response)</li>
+</ul>
+<p>3、WPDRRC 模型<br>WPDRRC 的要素由预警、保护、检测、响应、恢复和反击构成。模型蕴涵的网络安全能力主要是预警能力、保护能力、检测能力、响应能力、恢复能力和反击能力。</p>
+<h2 id="能力成熟度模型-CMM"><a href="#能力成熟度模型-CMM" class="headerlink" title="能力成熟度模型(CMM)"></a>能力成熟度模型(CMM)</h2><p>1、级别</p>
+<ul>
+<li>1 级-非正式执行：具备随机、无序、被动的过程</li>
+<li>2 级-计划跟踪：具备主动、非体系化的过程</li>
+<li>3 级-充分定义：具备正式的、规范的过程</li>
+<li>4 级-量化控制：具备可量化的过程</li>
+<li>5 级-持续优化：具备可持续优化的过程<br>级别越大，表示能力成熟度越高</li>
+</ul>
+<p>2、主要模型</p>
+<ul>
+<li>SSE-CMM(Systems Security Engineering Capability Maturity Model)是系统安全工程能力成熟度模型。SSE-CMM 包括工程过程类 (Engineering) 、组织过程类 (Organization)、项目过程类 (Proiect) </li>
+<li>数据安全能力成熟度模型：从四个维度评估<ul>
+<li>组织建设——数据安全组织机构的架构建立、职责分配和沟通协作</li>
+<li>制度流程——组织机构关键数据安全领域的制度规范和流程落地建设</li>
+<li>技术工具——通过技术手段和产品工具固化安全要求或自动化实现安全工作</li>
+<li>人员能力——执行数据安全工作的人员的意识及专业能力</li>
+</ul>
+</li>
+<li>软件安全能力成熟度模型：分成五级，各级别的主要过程如下:<ul>
+<li>CMM 1级——补丁修补</li>
+<li>CMM 2级——渗透测试、安全代码评审</li>
+<li>CMM 3级——漏洞评估、代码分析、安全编码标准</li>
+<li>CMM 4级——软件安全风险识别、SDLC 实施不同安全检查点</li>
+<li>CMM 5级——改进软件安全风险覆盖率、评估安全差距</li>
+</ul>
+</li>
+</ul>
+<h2 id="纵深防御模型"><a href="#纵深防御模型" class="headerlink" title="纵深防御模型"></a>纵深防御模型</h2><p>1、基本思路<br>将信息网络安全防护措施有机组合起来，针对保护对象，部署合适的安全措施，形成多道保护线，各安全防护措施能够互相支持和补救，尽可能地阻断攻击者的威胁</p>
+<p>2、需要建立四道防线</p>
+<ul>
+<li>安全保护是网络的第一道防线，能够阻止对网络的入侵和危害</li>
+<li>安全监测是网络的第二道防线，可以及时发现入侵和破坏</li>
+<li>实时响应是网络的第三道防线，当攻击发生时维持网络“打不垮”</li>
+<li>恢复是网络的第四道防线，使网络在遭受攻击后能以最快的速度“起死回生”，最大限度地降低安全事件带来的损失</li>
+</ul>
+<h2 id="分层防护模型"><a href="#分层防护模型" class="headerlink" title="分层防护模型"></a>分层防护模型</h2><p>分层防护模型针对单独保护节点，以 OSI 7层模型为参考，对保护对象进行层次化保护，典型保护层次分为物理层、网络层、系统层、应用层、用户层、管理层，然后针对每层的安全威胁，部署合适的安全措施，进行分层防护</p>
+<h2 id="等级保护模型"><a href="#等级保护模型" class="headerlink" title="等级保护模型"></a>等级保护模型</h2><p>等级保护模型是根据网络信息系统在国家安全、经济安全、社会稳定和保护公共利益等方面的重要程度，结合系统面临的风险、系统特定的安全保护要求和成本开销等因素，将其划分成不同的安全保护等级，采取相应的安全保护措施，以保障信息和信息系统的安全。</p>
+<h2 id="网络生存模型"><a href="#网络生存模型" class="headerlink" title="网络生存模型"></a>网络生存模型</h2><p>网络生存性是指在网络信息系统遭受入侵的情形下，网络信息系统仍然能够持续提供必要服务的能力。</p>
+<p>遵循“3R”的建立方法</p>
+<ul>
+<li>首先将系统划分成不可攻破的安全核和可恢复部分</li>
+<li>然后对一定的攻击模式，给出相应的 3R 策略，即抵抗(Resistance) 、识别 (Recognition) 和恢复 (Recovery) </li>
+<li>最后，定义网络信息系统应具备的正常服务模式和可能被黑客利用的入侵模式，给出系统需要重点保护的基本功能服务和关键信息等</li>
+</ul>
+<h1 id="安全原则"><a href="#安全原则" class="headerlink" title="安全原则"></a>安全原则</h1><p>1、系统性和动态性原则</p>
+<ul>
+<li>在建立网络安全防范体系时，应当特别强调系统的整体安全性，也就是人们常说的“木桶原则”，即木桶的最大容积取决于最短的一块木板。</li>
+<li>网络系统的安全防范应当是动态的，要根据网络安全的变化不断调整安全措施，适应新的网络环境，满足新的网络安全需求。</li>
+</ul>
+<p>2、纵深防护与协作性原则</p>
+<ul>
+<li>网络安全体系应该包括安全评估机制、安全防护机制、安全监测机制、安全应急响应机制</li>
+</ul>
+<p>3、网络安全风险和分级保护原则</p>
+<ul>
+<li>指根据网络资产的安全级别，采用合适的网络防范措施来保护网络资产做到适度防护。</li>
+</ul>
+<p>4、标准化与一致性原则</p>
+<ul>
+<li>网络系统是一个庞大的系统工程，其安全体系的设计必须遵循一系列的标准</li>
+</ul>
+<p>5、技术与管理相结合原则</p>
+<ul>
+<li>网络安全体系是一个复杂的系统工程，涉及人、技术、操作等要素，单靠技术或单靠管理都不可能实现</li>
+</ul>
+<p>6、安全第一，预防为主原则</p>
+<ul>
+<li>网络安全应以预防为主，否则亡羊补牢，为之晚矣。特别是大型的网络，一旦攻击者进入系统后，就难以控制网络安全局面</li>
+</ul>
+<p>7、安全与发展同步，业务与安全等同<br>网络安全的建设要实现和信息化统一谋划、统一部署、统一推进、统一实施，确保三同步——同步规划、同步建设、同步运行，做到安全与发展协调一致、齐头并进，以安全保发展、以发展促安全，安全与发展同步，业务与安全等同</p>
+<p>8、人机物融合和产业发展原则<br>人是网络信息系统最为活跃的要素，网络安全体系的建设要分析人在网络信息系统中的安全保障需求</p>
+<h1 id="网络安全策略"><a href="#网络安全策略" class="headerlink" title="网络安全策略"></a>网络安全策略</h1><p>1、网络安全策略是有关保护对象的网络安全规则及要求<br>主要依据：网络安全法律法规和网络安全风险。</p>
+<p>2、安全策略文件 应具备以下内容</p>
+<ul>
+<li>涉及范围：该文件内容涉及的主题、组织区域、技术系统</li>
+<li>有效期：策略文件适用期限</li>
+<li>所有者：规定本策略文件的所有者，由其负责维护策略文件，以及保证文件的完整性，策略文件由所有者签署而正式生效</li>
+<li>责任：在本策略文件覆盖的范围内，确定每个安全单元的责任人</li>
+<li>参考文件：引用的参考文件，比如安全计划</li>
+<li>策略主体内容：这是策略文件中最重要的部分，规定具体的策略内容</li>
+<li>复查：规定对本策略文件的复查事宜，包括是否进行复查、具体复查时间、复查方式等</li>
+<li>违规处理：对于不遵守本策略文件条款内容的处理办法</li>
+</ul>
+<h1 id="网络安全体系组成框架"><a href="#网络安全体系组成框架" class="headerlink" title="网络安全体系组成框架"></a>网络安全体系组成框架</h1><p>框架及建设内容</p>
+<ul>
+<li>网络安全法律法规</li>
+<li>网络安全策略</li>
+<li>网络安全组织</li>
+<li>网络安全管理</li>
+<li>网络安全基础设施及网络安全服务</li>
+<li>网络安全技</li>
+<li>网络信息科技与产业生态</li>
+<li>网络安全教育与培训</li>
+<li>网络安全标准与规范</li>
+<li>网络安全运营与应急响应</li>
+<li>网络安全投入与建设等</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jenchoi.top">jenchoi413</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jenchoi.top/2023/chapter4-security-architecture-and-model/">https://jenchoi.top/2023/chapter4-security-architecture-and-model/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jenchoi.top" target="_blank">jenchoi413的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BD%AF%E8%80%83/">软考</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/chapter5-physical-and-environmental-security/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第5章：物理与环境安全技术</div></div></a></div><div class="next-post pull-right"><a href="/2023/chapter3-basic-theory-of-cryptography/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第3章：密码学基本理论</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/information-security-engineer/" title="软考-信息安全工程师-备考笔记"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-01</div><div class="title">软考-信息安全工程师-备考笔记</div></div></a></div><div><a href="/2023/chapter1-information-security-overview/" title="第1章：网络信息安全概述"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-01</div><div class="title">第1章：网络信息安全概述</div></div></a></div><div><a href="/2023/chapter2-attack-priciples-and-methods/" title="第2章：网络攻击原理与常用方法"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-01</div><div class="title">第2章：网络攻击原理与常用方法</div></div></a></div><div><a href="/2023/chapter3-basic-theory-of-cryptography/" title="第3章：密码学基本理论"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-08</div><div class="title">第3章：密码学基本理论</div></div></a></div><div><a href="/2023/chapter7-principles-and-applications-of-access-control/" title="第7章：访问控制技术原理与应用"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-11</div><div class="title">第7章：访问控制技术原理与应用</div></div></a></div><div><a href="/2023/chapter6-authentication-principles-and-applications/" title="第6章：认证技术原理与应用"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-10</div><div class="title">第6章：认证技术原理与应用</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">网络安全体系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">相关安全模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BLP%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">BLP模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BiBa%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">BiBa模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%B5%81%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">信息流模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E4%BF%9D%E9%9A%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.4.</span> <span class="toc-text">信息保障模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%BD%E5%8A%9B%E6%88%90%E7%86%9F%E5%BA%A6%E6%A8%A1%E5%9E%8B-CMM"><span class="toc-number">2.5.</span> <span class="toc-text">能力成熟度模型(CMM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%B5%E6%B7%B1%E9%98%B2%E5%BE%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.6.</span> <span class="toc-text">纵深防御模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E9%98%B2%E6%8A%A4%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.7.</span> <span class="toc-text">分层防护模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.8.</span> <span class="toc-text">等级保护模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%94%9F%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.9.</span> <span class="toc-text">网络生存模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%8E%9F%E5%88%99"><span class="toc-number">3.</span> <span class="toc-text">安全原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5"><span class="toc-number">4.</span> <span class="toc-text">网络安全策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%84%E6%88%90%E6%A1%86%E6%9E%B6"><span class="toc-number">5.</span> <span class="toc-text">网络安全体系组成框架</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By jenchoi413</div><div class="footer_custom_text">来自地狱-去往天堂-路过人间</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'comments.jenchoi.tk',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: true,
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
